@@ -1,0 +1,39 @@
+    <!-- <form role="form" id="gameForm">
+      <div class="row fade">
+        <label for="name" class="h2 white bold">Start point</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter name" required>
+      </div>        
+      <div class="form-group fade">
+        <label for="message" class="h2 white bold">Message</label>
+        <textarea id="message" class="form-control" rows="5" placeholder="Enter message" required></textarea>
+      </div>
+      <div class="fade">
+        <button type="submit" id="form-submit" class="btn proj-btn main-btn btn-lg" style="margin: 10px;">Submit</button>
+        <div id="msgSubmit" class="h5 text-center boxCol fit-content" style="visibility: hidden;">.</div>
+      </div>
+    </form> -->
+
+    <!-- <form action="https://en.wikipedia.org/w/index.php" autocomplete="off" id="searchform">
+      <div id="simpleSearch">
+        <input type="search" name="search" placeholder="Search Wikipedia" title="Search Wikipedia [alt-shift-f]" accesskey="f" id="searchInput" tabindex="1" autocomplete="off">
+        <input type="hidden" value="Special:Search" name="title">
+        <input type="submit" name="go" value="Go" title="Go to a page with this exact name if it exists" id="searchButton" class="searchButton">							
+      </div>
+    </form> -->
+
+
+
+    
+    <!-- <form role="form" id="form">
+      start point:<br>
+      <input type="search" id="start" placeholder="England">
+      <br>
+      end point:<br>
+      <input type="search" id="end" placeholder="Toothbrush">
+      <br><br>
+      <button id="go">GO</button>
+      <br><br>
+    </form>  -->
+
+    <!-- <iframe src="https://en.wikipedia.org/wiki/Main_Page" width="1600" height="900"></iframe>  -->
+    <!-- ?printable=yes -->
