@@ -1,13 +1,12 @@
 var dataSav = [];
+var myScript = '';
 
-function autocomplete(data, new=true) {
-  console.log(dataSav);
-  dataSav = data;
-  var box = document.getElementById("searchbox");
-  var focus = -1;
+
+function autocomplete(data) {
+  var box = document.activeElement;
   var val = box.value;
-  // console.log(data[1]);
-  if (new) closeAll();
+  dataSav = data;
+  closeAll();
   if (data.length > 0) {
     for (var i = 0; i < data[1].length; i++) {
       var b = document.createElement("div");
@@ -18,35 +17,41 @@ function autocomplete(data, new=true) {
           box.value = this.getElementsByTagName("input")[0].value;
           closeAll();
       });
-      document.getElementById('autocomplete').appendChild(b);
+      document.getElementById(box.id + '-autocomplete').appendChild(b);
     }
   }
 }
 
 function closeAll() {
-  var auto = document.getElementById('autocomplete');
-  while (auto.firstChild) auto.removeChild(auto.firstChild); // wipes board
+  var auto = document.getElementsByClassName('autocomplete');
+  for (var i=0; i < auto.length; i++) {
+    while (auto[i].firstChild) auto[i].removeChild(auto[i].firstChild);
+  }
 }
 
+function getSearchData(query) {
+  console.log(query);
+  if (myScript !== '') document.body.removeChild(myScript) ;
+  myScript = document.createElement('script'); // this is the script that will hold the data we're trying to get 
+  myScript.src = 'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&formatversion=2&search=' + query + '&namespace=&limit=10&suggest=true&callback=autocomplete'; // http://en.wikipedia.org/w/api.php?action=opensearch&limit=10&format=json&callback=autocomplete&search=
+  document.body.appendChild(myScript);  // this attaches the script to the body of the page
+};
+
+
 $(document).ready(function () {
-
-  var myScript = '';
-  var box = document.getElementById('searchbox');
-
-  box.onkeyup = function() {
-    if (myScript !== '') document.body.removeChild(myScript) ;
-    var query = document.getElementById('searchbox').value; // this variable stores whatever is in the input text box
-    myScript = document.createElement('script'); // this is the script that will hold the data we're trying to get 
-    myScript.src = 'http://en.wikipedia.org/w/api.php?action=opensearch&limit=10&format=json&callback=autocomplete&search=' + query; // this sets the src of the script equal to the url of the data
-    document.body.appendChild(myScript);  // this attaches the script to the body of the page
-  };
-  box.onfocus = function() { console.log('focus') ; autocomplete(dataSav, false); }
-  // box.addEventListener("focus", autocomplete(dataSav));
+  var startBox = document.getElementById('startBox');
+  startBox.addEventListener("keyup", () => getSearchData(startBox.value));
+  startBox.addEventListener("focus", () => getSearchData(startBox.value));
+  var endBox = document.getElementById('endBox');
+  endBox.addEventListener("keyup", () => getSearchData(endBox.value));
+  endBox.addEventListener("focus",  () => getSearchData(endBox.value)); // loop this
 
   document.addEventListener("click", function (e) {
-    closeAll();
+    if (!$('input').is(':focus')) closeAll();
   });
 });
+
+
 
 
 
@@ -80,14 +85,12 @@ function autoaslfk(box, arr) {
       var x = document.getElementById(this.id + "autocomplete-list");
       if (x) x = x.getElementsByTagName("div");
       if (e.keyCode == 40) {
-        /*If the arrow DOWN key is pressed,
-        increase the currentFocus variable:*/
+        /*If the arrow DOWN key is pressed */
         currentFocus++;
         /*and and make the current item more visible:*/
         addActive(x);
       } else if (e.keyCode == 38) { //up
-        /*If the arrow UP key is pressed,
-        decrease the currentFocus variable:*/
+        /*If the arrow UP key is pressed */
         currentFocus--;
         /*and and make the current item more visible:*/
         addActive(x);
