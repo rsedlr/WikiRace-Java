@@ -1,75 +1,82 @@
-function autoCompleteData(data){
-  $(document).ready(function () {
-    // console.clear()
-    // for (i=0; i < Object.keys(data).length; i++) {
-    //   console.log(`data[${i}]: ${data[i]}`);
-    // }
-    autocomplete(document.getElementById("searchbox"), data[1]);
+var dataSav = [];
 
-  });
+function autocomplete(data, new=true) {
+  console.log(dataSav);
+  dataSav = data;
+  var box = document.getElementById("searchbox");
+  var focus = -1;
+  var val = box.value;
+  // console.log(data[1]);
+  if (new) closeAll();
+  if (data.length > 0) {
+    for (var i = 0; i < data[1].length; i++) {
+      var b = document.createElement("div");
+      b.innerHTML = "<strong>" + data[1][i].substr(0, val.length) + "</strong>";
+      b.innerHTML += data[1][i].substr(val.length);
+      b.innerHTML += "<input type='hidden' value='" + data[1][i] + "'>";
+      b.addEventListener("click", function(e) {
+          box.value = this.getElementsByTagName("input")[0].value;
+          closeAll();
+      });
+      document.getElementById('autocomplete').appendChild(b);
+    }
+  }
+}
+
+function closeAll() {
+  var auto = document.getElementById('autocomplete');
+  while (auto.firstChild) auto.removeChild(auto.firstChild); // wipes board
 }
 
 $(document).ready(function () {
-  var myScript = '';
 
-  document.getElementById('searchbox').onkeypress = function(){
+  var myScript = '';
+  var box = document.getElementById('searchbox');
+
+  box.onkeyup = function() {
     if (myScript !== '') document.body.removeChild(myScript) ;
     var query = document.getElementById('searchbox').value; // this variable stores whatever is in the input text box
     myScript = document.createElement('script'); // this is the script that will hold the data we're trying to get 
-    myScript.src = 'http://en.wikipedia.org/w/api.php?action=opensearch&limit=10&format=json&callback=autoCompleteData&search=' + query; // this sets the src of the script equal to the url of the data
+    myScript.src = 'http://en.wikipedia.org/w/api.php?action=opensearch&limit=10&format=json&callback=autocomplete&search=' + query; // this sets the src of the script equal to the url of the data
     document.body.appendChild(myScript);  // this attaches the script to the body of the page
   };
+  box.onfocus = function() { console.log('focus') ; autocomplete(dataSav, false); }
+  // box.addEventListener("focus", autocomplete(dataSav));
 
+  document.addEventListener("click", function (e) {
+    closeAll();
+  });
 });
 
 
 
-
-
-function autocomplete(inp, arr) {
-  /*the autocomplete function takes two arguments,
-  the text field element and an array of possible autocompleted values:*/
+function autoaslfk(box, arr) {
   var currentFocus;
-  /*execute a function when someone writes in the text field:*/
-    // console.log(arr);
-    console.log(this);
+  var a, b, i, val = this.value;
+  closeAllLists();
+  if (!val) { return false; }
+  a = document.createElement("DIV");
+  a.setAttribute("id", this.id + "autocomplete-list");
+  a.setAttribute("class", "autocomplete-items");
+  /*append the DIV element as a child of the autocomplete container:*/
+  this.parentNode.appendChild(a);
 
-    var a, b, i, val = this.value;
-    /*close any already open lists of autocompleted values*/
-    closeAllLists();
-    if (!val) { return false;}
-    currentFocus = -1;
-    /*create a DIV element that will contain the items (values):*/
-    a = document.createElement("DIV");
-    a.setAttribute("id", this.id + "autocomplete-list");
-    a.setAttribute("class", "autocomplete-items");
-    /*append the DIV element as a child of the autocomplete container:*/
-    this.parentNode.appendChild(a);
-    /*for each item in the array...*/
-    console.log(arr);
-    for (i = 0; i < arr.length; i++) {
-      /*check if the item starts with the same letters as the text field value:*/
-      if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-        /*create a DIV element for each matching element:*/
-        b = document.createElement("DIV");
-        /*make the matching letters bold:*/
-        b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-        b.innerHTML += arr[i].substr(val.length);
-        /*insert a input field that will hold the current array item's value:*/
-        b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-        /*execute a function when someone clicks on the item value (DIV element):*/
-        b.addEventListener("click", function(e) {
-            /*insert the value for the autocomplete text field:*/
-            inp.value = this.getElementsByTagName("input")[0].value;
-            /*close the list of autocompleted values,
-            (or any other open lists of autocompleted values:*/
-            closeAllLists();
-        });
-        a.appendChild(b);
-      }
+  for (i = 0; i < arr.length; i++) {
+    /*check if the item starts with the same letters as the text field value:*/
+    if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+      b = document.createElement("DIV");
+      b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+      b.innerHTML += arr[i].substr(val.length);
+      b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+      b.addEventListener("click", function(e) {
+          box.value = this.getElementsByTagName("input")[0].value;
+          closeAllLists();
+      });
+      a.appendChild(b);
+    }
   }
   /*execute a function presses a key on the keyboard:*/
-  inp.addEventListener("keydown", function(e) {
+  box.addEventListener("keydown", function(e) {
       var x = document.getElementById(this.id + "autocomplete-list");
       if (x) x = x.getElementsByTagName("div");
       if (e.keyCode == 40) {
@@ -93,6 +100,7 @@ function autocomplete(inp, arr) {
         }
       }
   });
+
   function addActive(x) {
     /*a function to classify an item as "active":*/
     if (!x) return false;
@@ -109,12 +117,11 @@ function autocomplete(inp, arr) {
       x[i].classList.remove("autocomplete-active");
     }
   }
+
   function closeAllLists(elmnt) {
-    /*close all autocomplete lists in the document,
-    except the one passed as an argument:*/
     var x = document.getElementsByClassName("autocomplete-items");
     for (var i = 0; i < x.length; i++) {
-      if (elmnt != x[i] && elmnt != inp) {
+      if (elmnt != x[i] && elmnt != box) {
         x[i].parentNode.removeChild(x[i]);
       }
     }
