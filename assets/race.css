@@ -66,6 +66,10 @@ button {
   margin: 20px 5%;
 }
 
+.searchRow {
+  margin-bottom: 15px;
+}
+
 .searchDiv {
   margin: 10px auto;
 }
