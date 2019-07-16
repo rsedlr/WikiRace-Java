@@ -1,3 +1,10 @@
+ideas:
+-have 'follow link' button under start and end input
+-have iframe of chosen page below input
+-display results as graph or file path style
+
+
+
     <!-- <form role="form" id="gameForm">
       <div class="row fade">
         <label for="name" class="h2 white bold">Start point</label>

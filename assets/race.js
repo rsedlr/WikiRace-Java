@@ -1,11 +1,10 @@
-var dataSav = [];
-var myScript = '';
-
+var startLink = '', 
+    endLink = '', 
+    myScript = '';
 
 function autocomplete(data) {
   var box = document.activeElement;
   var val = box.value;
-  dataSav = data;
   closeAll();
   if (data.length > 0) {
     for (var i = 0; i < data[1].length; i++) {
@@ -13,9 +12,15 @@ function autocomplete(data) {
       b.innerHTML = "<strong>" + data[1][i].substr(0, val.length) + "</strong>";
       b.innerHTML += data[1][i].substr(val.length);
       b.innerHTML += "<input type='hidden' value='" + data[1][i] + "'>";
+      b.innerHTML += "<span style='display: none'>" + data[3][i] + "</span>";
       b.addEventListener("click", function(e) {
           box.value = this.getElementsByTagName("input")[0].value;
           closeAll();
+          if (box.id == 'startBox') {
+            startLink = this.getElementsByTagName("span")[0].innerHTML;
+          } else if (box.id == 'endBox') {
+            endLink = this.getElementsByTagName("span")[0].innerHTML;
+          }
       });
       document.getElementById(box.id + '-autocomplete').appendChild(b);
     }
@@ -30,12 +35,23 @@ function closeAll() {
 }
 
 function getSearchData(query) {
-  console.log(query);
   if (myScript !== '') document.body.removeChild(myScript) ;
   myScript = document.createElement('script'); // this is the script that will hold the data we're trying to get 
   myScript.src = 'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&formatversion=2&search=' + query + '&namespace=&limit=10&suggest=true&callback=autocomplete'; // http://en.wikipedia.org/w/api.php?action=opensearch&limit=10&format=json&callback=autocomplete&search=
   document.body.appendChild(myScript);  // this attaches the script to the body of the page
 };
+
+function search() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      // do something
+      console.log('submitted links');
+    }
+  };
+  xhttp.open("POST", `/search`, true);
+  xhttp.send([startLink, endLink]);
+}
 
 
 $(document).ready(function () {

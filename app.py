@@ -14,6 +14,11 @@ def server_static(filepath):
 def index():
   return template('race')
 
+@route('/search', method='POST')
+def search():
+  start, end = request.body.read().split(',')
+  print('start: ' + start + '\nend: ' + end)
+
 
 if __name__ == '__main__':
   port = int(os.environ.get('PORT', 8080))
