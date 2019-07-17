@@ -72,7 +72,7 @@ button {
 
 
 #main {
-  margin: 20px 5%;
+  margin: 10vh 10vw;
 }
 
 .searchRow {
@@ -82,8 +82,6 @@ button {
 .searchDiv {
   margin: 10px auto;
 }
-
-
 
 
 

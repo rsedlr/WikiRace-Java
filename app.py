@@ -16,8 +16,12 @@ def index():
 
 @route('/search', method='POST')
 def search():
-  start, end = request.body.read().split(',')
-  print('start: ' + start + '\nend: ' + end)
+  data = (request.body.read().decode("utf-8"))
+  print(data)
+  # print(data[2])
+  # start, end = data[0], data[1]
+  # start, end = request.body.readlines()
+  # print('start: ' + start + '\nend: ' + end)
 
 
 if __name__ == '__main__':

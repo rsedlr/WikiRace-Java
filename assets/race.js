@@ -50,9 +50,8 @@ function search() {
     }
   };
   xhttp.open("POST", `/search`, true);
-  xhttp.send([startLink, endLink]);
+  xhttp.send(JSON.stringify({'start': startLink, 'end': endLink}));  // JSON.stringify([startLink, endLink])
 }
-
 
 $(document).ready(function () {
   var startBox = document.getElementById('startBox');
