@@ -1,6 +1,4 @@
-var startLink = '', 
-    endLink = '', 
-    myScript = '';
+var startLink, endLink, myScript;
 
 function autocomplete(data) {
   var box = document.activeElement;
