@@ -83,6 +83,24 @@ button {
   margin: 10px auto;
 }
 
+#info {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #cedff3;
+  color: black;
+}
+
+#results {
+  margin: 10px auto;
+}
+
+.resultBox {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #cef2e0;
+  color: black;
+}
+
 
 
 

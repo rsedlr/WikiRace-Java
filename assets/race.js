@@ -41,7 +41,6 @@ function setID(data, id) {
   } else if (id == 'end') {
     end[1] = temp;
   }
-  console.log(id, temp);
 }
 
 function startID(data) {
@@ -67,11 +66,28 @@ function closeAll() {
   }
 }
 
+function displayResults(results) {
+  var resultsDiv = document.getElementById('results');
+  var info = document.getElementById('info')
+  var lenResults = results.length;
+  info.innerHTML = `Found ${lenResults} results in __ seconds`;
+  info.style.display = 'block';
+  for (var item=0; item < lenResults; item++) {
+    var resultBox = document.createElement("div"); 
+    resultBox.className = "resultBox";
+    // resultBox.innerHTML = results[item].replace(',', ' > ');
+    console.log(typeof results[item]);
+    resultsDiv.appendChild(resultBox);
+  }
+}
+
 function search() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() { 
     if (this.readyState == 4 && this.status == 200) {
-      console.log('submitted links'); 
+      var results = JSON.parse(this.response);
+      console.log(results); 
+      displayResults(results);
     }
   }
   xhttp.open("POST", `/search`, true);

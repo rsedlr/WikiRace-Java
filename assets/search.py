@@ -2,13 +2,10 @@
 
 
 def searchDatabase(database, startID, endID):
-  print(startID)
-  print(endID)
 
   if startID == endID:
-    return [startID]
+    return [[startID]]
   
-
   paths = []
   unvisited_forward = {startID: [None]}
   unvisited_backward = {endID: [None]}

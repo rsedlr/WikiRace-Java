@@ -17,13 +17,14 @@ class Database(object):
     elif linkDirection == 'out':
       sumType = 'outgoing_links_count'
     else:
-      return None
+      raise ValueError('Invalid linkDirection {0} provided, must be \'in\' or \'out\''.format(linkDirection))
 
     pageIDs = str(tuple(pageIDs)).replace(',)', ')')
     query = 'SELECT SUM({0}) FROM links WHERE id IN {1};'.format(sumType, pageIDs)
     self.cursor.execute(query)
 
     return self.cursor.fetchone()[0]
+
 
   def getLinks(self, linkDirection, pageIDs):
     if linkDirection == 'in':
@@ -38,3 +39,15 @@ class Database(object):
     self.cursor.execute(query)
 
     return self.cursor
+
+
+  def getPageName(self, pageID):
+    query = 'SELECT title FROM pages WHERE id = {0};'.format(pageID)
+    self.cursor.execute(query)
+    result = self.cursor.fetchall()
+
+    if not result:
+      raise ValueError('Invalid page ID {0} provided, page does not exist'.format(pageID))
+    
+    result = str(result[0])[2:-3]  # trim (' and ,') from result
+    return result  # TODO: currently returns sanetized name, revert this to normal
