@@ -47,7 +47,7 @@ def search():
 
 
 if __name__ == '__main__':
-  port = int(os.environ.get('PORT', 3001))
+  port = int(os.environ.get('PORT', 3100))
   run(host='127.0.0.1', port=port, debug=True, reloader=True)
 
 
