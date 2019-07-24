@@ -12,16 +12,15 @@ database = Database(file='./database/wikiLinks.sqlite')
 def error404(error):
   return template('error404')
 
-@route('/static/<filepath:path>') 
+@route('/wikiRace/static/<filepath:path>') 
 def server_static(filepath):
   return static_file(filepath, root='./assets')
 
-@route('/')
-@route('/race')
+@route('/wikiRace')
 def index():
   return template('race')
 
-@route('/search', method='POST')
+@route('/wikiRace/search', method='POST')
 def search():
   try:
     data = json.loads(request.body.read().decode("utf-8"))
