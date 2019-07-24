@@ -95,7 +95,7 @@ function search() {
       displayResults(results);
     }
   }
-  xhttp.open("POST", `/search`, true);
+  xhttp.open("POST", `/wikiRace/search`, true);
   xhttp.send(JSON.stringify({'start': start, 'end': end}));  // JSON.stringify([start[0], end[0]])
 }
 
