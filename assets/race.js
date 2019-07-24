@@ -67,16 +67,19 @@ function closeAll() {
 }
 
 function displayResults(results) {
-  var resultsDiv = document.getElementById('results');
-  var info = document.getElementById('info')
   var lenResults = results.length;
+  var resultsDiv = document.getElementById('results');
+  var info = document.createElement("div");
+  
+  info.id = 'info';
+  info.className = "resultBox";
   info.innerHTML = `Found ${lenResults} results in __ seconds`;
-  info.style.display = 'block';
+  resultsDiv.appendChild(info);
+
   for (var item=0; item < lenResults; item++) {
     var resultBox = document.createElement("div"); 
     resultBox.className = "resultBox";
-    // resultBox.innerHTML = results[item].replace(',', ' > ');
-    console.log(typeof results[item]);
+    resultBox.innerHTML = String(results[item]).replace(/,/gi, ' > ');  // replace pasted regex value to replace all occurrences
     resultsDiv.appendChild(resultBox);
   }
 }

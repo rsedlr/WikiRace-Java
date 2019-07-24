@@ -39,8 +39,6 @@ def search():
       temp.append(database.getPageName(pageID))
     routes.append(temp)
   
-  print(routes)
-
   return json.dumps(routes)
   
 
@@ -49,3 +47,11 @@ if __name__ == '__main__':
   port = int(os.environ.get('PORT', 8080))
   run(host='127.0.0.1', port=port, debug=True, reloader=True)
 
+
+'''
+TODO
+  if imputs are left blank - display appropreate message
+  display results with hyperlink
+  display results in nicer way
+
+'''
