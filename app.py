@@ -30,6 +30,7 @@ def search():
   routes = []
   end = data['end']
   start = data['start']
+  initialTime = time.time()
   # print('\nstart: %s\nend: %s\n' %(start[0], end[0]))
   result = searchDatabase(database, start[1], end[1])
 
@@ -39,6 +40,8 @@ def search():
       temp.append(database.getPageName(pageID))
     routes.append(temp)
   
+  routes.insert(0, time.time() - initialTime)
+
   return json.dumps(routes)
   
 
@@ -53,5 +56,6 @@ TODO
   if imputs are left blank - display appropreate message
   display results with hyperlink
   display results in nicer way
+  add buffering animation
 
 '''

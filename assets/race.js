@@ -67,13 +67,14 @@ function closeAll() {
 }
 
 function displayResults(results) {
+  var time = Math.round(results.shift() * 1000) / 1000;
   var lenResults = results.length;
   var resultsDiv = document.getElementById('results');
   var info = document.createElement("div");
-  
+
   info.id = 'info';
   info.className = "resultBox";
-  info.innerHTML = `Found ${lenResults} results in __ seconds`;
+  info.innerHTML = `Found ${lenResults} results in ${time} seconds`;
   resultsDiv.appendChild(info);
 
   for (var item=0; item < lenResults; item++) {
