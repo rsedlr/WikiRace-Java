@@ -1,7 +1,12 @@
 import os, json, requests, time
 from bottle import route, run, template, static_file, redirect, request, response, put, post, get, error
 
-# from assets.database import Database
+from assets.search import searchDatabase
+from assets.database import Database
+
+
+database = Database(file='./database/wikiLinks.sqlite')
+
 
 ''' useless '''
 def findPath(data):  # not worth trying
@@ -43,7 +48,9 @@ def search():
     print(e)
   end = data['end']
   start = data['start']
-  print('start: %s\nend: %s' %(start[0], end[0]))
+  # print('\nstart: %s\nend: %s\n' %(start[0], end[0]))
+  result = searchDatabase(database, start[1], end[1])
+  print(result)
 
   # findPath(data)
 
