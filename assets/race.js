@@ -1,4 +1,5 @@
-var startLink, endLink, myScript;
+var start = ['', 0], end = ['', 0],   // query title followed by pageID of title
+    autocompleteScript = '', idScript = '';
 
 function autocomplete(data) {
   var box = document.activeElement;
@@ -12,18 +13,52 @@ function autocomplete(data) {
       b.innerHTML += "<input type='hidden' value='" + data[1][i] + "'>";
       b.innerHTML += "<span style='display: none'>" + data[3][i] + "</span>";
       b.addEventListener("click", function(e) {
-          box.value = this.getElementsByTagName("input")[0].value;
-          closeAll();
-          if (box.id == 'startBox') {
-            startLink = this.getElementsByTagName("span")[0].innerHTML;
-          } else if (box.id == 'endBox') {
-            endLink = this.getElementsByTagName("span")[0].innerHTML;
-          }
+        box.value = this.getElementsByTagName("input")[0].value;
+        closeAll();
+        getPageID(box.value, box.id.replace("Box", ""));
+        if (box.id == 'startBox') {
+          start[0] = this.getElementsByTagName("span")[0].innerHTML;            
+        } else if (box.id == 'endBox') {
+          end[0] = this.getElementsByTagName("span")[0].innerHTML;
+        }
       });
       document.getElementById(box.id + '-autocomplete').appendChild(b);
     }
   }
 }
+
+function getPageID(title, which) {
+  if (idScript !== '') document.body.removeChild(idScript) ;
+  idScript = document.createElement('script');  // the script that will hold the data we're trying to get
+  idScript.src = `https://en.wikipedia.org/w/api.php?action=query&format=json&callback=${which}ID&titles=${title}`;
+  document.body.appendChild(idScript);  // this attaches the script to the body of the page
+}
+
+function setID(data, id) {
+  var temp = parseInt(Object.keys(data['query']['pages'])[0]);
+  if (id == 'start') {
+    start[1] = temp;
+  } else if (id == 'end') {
+    end[1] = temp;
+  }
+  console.log(id, temp);
+}
+
+function startID(data) {
+  setID(data, 'start');
+}
+
+function endID(data) {
+  setID(data, 'end');
+}
+
+function getSearchData(query) {
+  if (autocompleteScript !== '') document.body.removeChild(autocompleteScript) ;
+  autocompleteScript = document.createElement('script'); // the script that will hold the data we're trying to get
+  autocompleteScript.src = 'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&formatversion=2&search='
+                              + query + '&namespace=&limit=10&suggest=true&callback=autocomplete'; 
+  document.body.appendChild(autocompleteScript);  // this attaches the script to the body of the page
+};
 
 function closeAll() {
   var auto = document.getElementsByClassName('autocomplete');
@@ -32,23 +67,15 @@ function closeAll() {
   }
 }
 
-function getSearchData(query) {
-  if (myScript !== '') document.body.removeChild(myScript) ;
-  myScript = document.createElement('script'); // this is the script that will hold the data we're trying to get 
-  myScript.src = 'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&formatversion=2&search=' + query + '&namespace=&limit=10&suggest=true&callback=autocomplete'; // http://en.wikipedia.org/w/api.php?action=opensearch&limit=10&format=json&callback=autocomplete&search=
-  document.body.appendChild(myScript);  // this attaches the script to the body of the page
-};
-
 function search() {
   var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
+  xhttp.onreadystatechange = function() { 
     if (this.readyState == 4 && this.status == 200) {
-      // do something
-      console.log('submitted links');
+      console.log('submitted links'); 
     }
-  };
+  }
   xhttp.open("POST", `/search`, true);
-  xhttp.send(JSON.stringify({'start': startLink, 'end': endLink}));  // JSON.stringify([startLink, endLink])
+  xhttp.send(JSON.stringify({'start': start, 'end': end}));  // JSON.stringify([start[0], end[0]])
 }
 
 $(document).ready(function () {
