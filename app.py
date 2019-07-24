@@ -1,8 +1,8 @@
 import os, json, requests, time
 from bottle import route, run, template, static_file, redirect, request, response, put, post, get, error
 
-from .assets.search import searchDatabase
-from .assets.database import Database
+from search import searchDatabase
+from database import Database
 
 
 database = Database(file='./database/wikiLinks.sqlite')
