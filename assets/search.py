@@ -77,15 +77,6 @@ def searchDatabase(database, startID, endID):
 
 
 def get_paths(page_ids, visited_dict):
-  """Returns a list of paths which go from the provided pages to either the source or target pages.
-
-  Args:
-    page_ids: The list of page IDs whose paths to get.
-
-  Returns:
-    list(list(int)): A list of lists of page IDs corresponding to paths from the provided page IDs
-      to the source or target pages.
-  """
   paths = []
 
   for page_id in page_ids:

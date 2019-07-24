@@ -72,6 +72,8 @@ function displayResults(results) {
   var resultsDiv = document.getElementById('results');
   var info = document.createElement("div");
 
+	while (resultsDiv.firstChild) resultsDiv.removeChild(resultsDiv.firstChild); // wipes board
+
   info.id = 'info';
   info.className = "resultBox";
   info.innerHTML = `Found ${lenResults} results in ${time} seconds`;
@@ -90,7 +92,6 @@ function search() {
   xhttp.onreadystatechange = function() { 
     if (this.readyState == 4 && this.status == 200) {
       var results = JSON.parse(this.response);
-      console.log(results); 
       displayResults(results);
     }
   }
