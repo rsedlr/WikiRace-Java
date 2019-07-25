@@ -70,10 +70,7 @@ function displayResults(results) {
   var time = Math.round(results.shift() * 1000) / 1000;
   var lenResults = results.length;
   var resultsDiv = document.getElementById('results');
-  var info = document.getElementById('info');
-
-  while (resultsDiv.lastElementChild.id != 'info') resultsDiv.removeChild(resultsDiv.lastElementChild);
-  
+  var info = document.getElementById('info');  
   info.className = info.className.replace(' loading', '');
   info.innerHTML = `Found ${lenResults} results in ${time} seconds`;
 
@@ -90,6 +87,8 @@ function search() {
   info.innerHTML = 'searching';
   info.classList += ' loading';
   info.style.display = 'table';
+
+  while (resultsDiv.lastElementChild.id != 'info') resultsDiv.removeChild(resultsDiv.lastElementChild);
 
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() { 
