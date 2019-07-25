@@ -72,7 +72,7 @@ function displayResults(results) {
   var resultsDiv = document.getElementById('results');
   var info = document.getElementById('info');
 
-  while (resultsDiv.firstChild) resultsDiv.removeChild(resultsDiv.firstChild);
+  while (resultsDiv.lastElementChild.id != 'info') resultsDiv.removeChild(resultsDiv.lastElementChild);
   
   info.innerHTML = `Found ${lenResults} results in ${time} seconds`;
 
