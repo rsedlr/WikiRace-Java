@@ -77,8 +77,7 @@ function displayResults(results) {
   for (var item=0; item < lenResults; item++) {
     var resultBox = document.createElement("div"); 
     resultBox.className = "resultBox";
-    console.log(String(results[item]));
-    resultBox.innerHTML = String(results[item]).replace(/,/gi, '  >  ');  // replace regex value to replace all occurrences
+    resultBox.innerHTML = String(results[item]).replace(/,/gi, ' > ');  // replace regex value to replace all occurrences
     resultsDiv.appendChild(resultBox);
   }
 }
