@@ -84,6 +84,8 @@ function displayResults(results) {
 
 function search() {
   var info = document.getElementById('info');
+  var resultsDiv = document.getElementById('results');
+  
   info.innerHTML = 'searching';
   info.classList += ' loading';
   info.style.display = 'table';
