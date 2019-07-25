@@ -86,6 +86,7 @@ function displayResults(results) {
 
 function search() {
   var info = document.getElementById('info');
+  info.innerHTML = 'searching...';
   info.style.display = 'table';
 
   var xhttp = new XMLHttpRequest();

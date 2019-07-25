@@ -29,7 +29,7 @@
         </div>
       </div>
       <div id="results">
-        <div id="info" class="resultBox" style="display: none">searching...</div>
+        <div id="info" class="resultBox" style="display: none"></div>
       </div>
     </div>
     <!-- <footer><a href="/">Back to portfolio</a></footer> -->
