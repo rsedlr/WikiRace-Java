@@ -89,7 +89,6 @@ function search() {
   var info = document.getElementById('info');
   info.innerHTML = 'searching';
   info.classList += ' loading';
-  info.style.width = ''
   info.style.display = 'table';
 
   var xhttp = new XMLHttpRequest();
