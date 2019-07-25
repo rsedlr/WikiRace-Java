@@ -4,13 +4,21 @@ from bottle import route, run, template, static_file, redirect, request, respons
 from search import searchDatabase
 from database import Database
 
-
-database = Database(file='./database/wikiLinks.sqlite')
+try:
+  database = Database(file='./database/wikiLinks.sqlite')
+except:
+  dev = True
+  print('no database found')
 
 
 @error(404)
 def error404(error):
   return template('error404')
+
+if dev:
+  @route('/')
+  def rootDir():
+    redirect('/wikiRace')
 
 @route('/wikiRace/static/<filepath:path>') 
 def server_static(filepath):

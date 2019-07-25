@@ -70,14 +70,11 @@ function displayResults(results) {
   var time = Math.round(results.shift() * 1000) / 1000;
   var lenResults = results.length;
   var resultsDiv = document.getElementById('results');
-  var info = document.createElement("div");
+  var info = document.getElementById('info');
 
-	while (resultsDiv.firstChild) resultsDiv.removeChild(resultsDiv.firstChild); // wipes board
-
-  info.id = 'info';
-  info.className = "resultBox";
+  while (resultsDiv.firstChild) resultsDiv.removeChild(resultsDiv.firstChild);
+  
   info.innerHTML = `Found ${lenResults} results in ${time} seconds`;
-  resultsDiv.appendChild(info);
 
   for (var item=0; item < lenResults; item++) {
     var resultBox = document.createElement("div"); 
@@ -88,6 +85,9 @@ function displayResults(results) {
 }
 
 function search() {
+  var info = document.getElementById('info');
+  info.style.display = 'table';
+
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() { 
     if (this.readyState == 4 && this.status == 200) {
