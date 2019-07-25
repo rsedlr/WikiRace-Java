@@ -4,6 +4,8 @@ from bottle import route, run, template, static_file, redirect, request, respons
 from search import searchDatabase
 from database import Database
 
+dev = False
+
 try:
   database = Database(file='./database/wikiLinks.sqlite')
 except:
