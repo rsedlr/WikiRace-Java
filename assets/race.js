@@ -74,13 +74,13 @@ function displayResults(results) {
 
   while (resultsDiv.lastElementChild.id != 'info') resultsDiv.removeChild(resultsDiv.lastElementChild);
   
-  info.classList = info.classList.replace(/ loading/gi, '');
+  info.classList = info.classList.replace(/loading/gi, '');
   info.innerHTML = `Found ${lenResults} results in ${time} seconds`;
 
   for (var item=0; item < lenResults; item++) {
     var resultBox = document.createElement("div"); 
     resultBox.className = "resultBox";
-    resultBox.innerHTML = String(results[item]).replace(/,/gi, ' > ');  // replace pasted regex value to replace all occurrences
+    resultBox.innerHTML = String(results[item]).replace(/,/gi, ' > ');  // replace regex value to replace all occurrences
     resultsDiv.appendChild(resultBox);
   }
 }
