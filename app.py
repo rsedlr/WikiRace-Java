@@ -46,8 +46,8 @@ def search():
   for route in result:
     temp = []
     for pageID in route:
-      temp.append(database.getPageName(pageID))
-      print(database.getPageName(pageID))
+      temp.append(database.getPageName(pageID)[1:])
+      print(database.getPageName(pageID)[1:])
     routes.append(temp)
   
   routes.insert(0, time.time() - initialTime)
