@@ -34,7 +34,7 @@ input[type=text] {
 }
 
 button {
-  background-color: #cedff3;
+  background-color: #0075ff;
   color: black;
   border: 1px solid transparent;
   padding: 10px 15px;
@@ -70,7 +70,7 @@ button {
 
 /*when navigating through the items using the arrow keys:*/
 .autocomplete-active {
-  background-color: #cedff3 !important; 
+  background-color: #0075ff !important; 
   color: #ffffff; 
 }
 
@@ -88,7 +88,7 @@ button {
 }
 
 #info {
-  background-color: #ddcef2; 
+  background-color: #0ce600; 
   font-size: 30px;
   font-weight: 700;
   margin-bottom: 40px
@@ -101,7 +101,7 @@ button {
 .resultBox {
   margin: 20px auto;
   padding: 20px;
-  background-color: #cef2e0;
+  background-color: #fff;
   color: black;
   display: table;
   font-size: 20px;
@@ -109,5 +109,35 @@ button {
 }
 
 
+
+
+.loading {
+  font-size: 30px;
+}
+
+#info.loading {
+  width: 210px;
+}
+
+.loading:after {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: bottom;
+  -webkit-animation: ellipsis steps(4,end) 900ms infinite;      
+  animation: ellipsis steps(4,end) 1500ms infinite;
+  content: "\2026"; /* ascii code for the ellipsis character */
+  width: 0px;
+}
+
+@keyframes ellipsis {
+  to {
+    width: 1.25em;    
+  }
+}
+@-webkit-keyframes ellipsis {
+  to {
+    width: 1.25em;    
+  }
+}
 
 

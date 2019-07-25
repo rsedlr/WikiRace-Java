@@ -74,6 +74,7 @@ function displayResults(results) {
 
   while (resultsDiv.lastElementChild.id != 'info') resultsDiv.removeChild(resultsDiv.lastElementChild);
   
+  info.classList = info.classList.replace(' loading', '');
   info.innerHTML = `Found ${lenResults} results in ${time} seconds`;
 
   for (var item=0; item < lenResults; item++) {
@@ -86,7 +87,9 @@ function displayResults(results) {
 
 function search() {
   var info = document.getElementById('info');
-  info.innerHTML = 'searching...';
+  info.innerHTML = 'searching';
+  info.classList += ' loading';
+  info.style.width = ''
   info.style.display = 'table';
 
   var xhttp = new XMLHttpRequest();
