@@ -74,7 +74,7 @@ function displayResults(results) {
 
   while (resultsDiv.lastElementChild.id != 'info') resultsDiv.removeChild(resultsDiv.lastElementChild);
   
-  info.classList = info.classList.replace(/loading/gi, '');
+  info.className = info.className.replace(' loading', '');
   info.innerHTML = `Found ${lenResults} results in ${time} seconds`;
 
   for (var item=0; item < lenResults; item++) {
