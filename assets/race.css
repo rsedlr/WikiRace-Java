@@ -69,6 +69,10 @@ button:hover:before {
   top: 0;
 }
 
+#main {
+  margin: 75px 10vw;
+}
+
 .autocomplete {
   position: absolute;
   /* border: 1px solid #d4d4d4; */
@@ -100,11 +104,6 @@ button:hover:before {
 .autocomplete-active {
   background-color: #0075ff !important; 
   color: #ffffff; 
-}
-
-
-#main {
-  margin: 10vh 10vw;
 }
 
 .searchRow {
