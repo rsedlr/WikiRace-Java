@@ -46,13 +46,13 @@ def search():
     data = json.loads(request.body.read().decode("utf-8"))
   except Exception as e:
     print(e)
+    
   routes = []
   end = data['end']
   start = data['start']
   initialTime = time.time()
-  # print('\nstart: %s\nend: %s\n' %(start[0], end[0]))
   result = searchDatabase(database, start[1], end[1])
-
+  
   for route in result:
     temp = []
     for pageID in route:
