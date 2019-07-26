@@ -77,7 +77,7 @@ function displayResults(results) {
   info.style.width = 'auto';
 
   if (jumpsAway != 0) {
-    info.innerHTML = `Found ${lenResults} results in ${time} seconds <br>
+    info.innerHTML = `Found ${lenResults} paths in ${time} seconds <br>
                       ${results[0][0].replace(/_/gi, ' ')} is 
                       ${jumpsAway} pages away from ${results[0][jumpsAway].replace(/_/gi, ' ')}`;
   } else {
