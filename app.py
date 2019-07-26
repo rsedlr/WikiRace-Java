@@ -8,30 +8,37 @@ dev = False
 
 try:
   database = Database(file='./database/wikiLinks.sqlite')
+  print('**** Found deployment database ****')
 except:
+  database = Database(file='./database/wikiLinksDev.sqlite')
   dev = True
-  print('no database found')
 
 if '-dev' in sys.argv:
   dev = True
+
+
+if dev:
+  print('**** Running in development mode ****')
+
+  @route('/')
+  def rootDir():
+    redirect('/wikiRace')
 
 
 @error(404)
 def error404(error):
   return template('error404')
 
-if dev:
-  @route('/')
-  def rootDir():
-    redirect('/wikiRace')
 
 @route('/wikiRace/static/<filepath:path>') 
 def server_static(filepath):
   return static_file(filepath, root='./assets')
 
+
 @route('/wikiRace')
 def index():
   return template('race')
+
 
 @route('/wikiRace/search', method='POST')
 def search():
@@ -49,11 +56,10 @@ def search():
   for route in result:
     temp = []
     for pageID in route:
-      temp.append(database.getPageName(pageID)[1:].replace('_', ' '))
+      temp.append(database.getPageName(pageID))  # removed [1:].replace('_', ' ') as link needs to be constructed from original name
     routes.append(temp)
   
   routes.insert(0, time.time() - initialTime)
-
   return json.dumps(routes)
   
 
@@ -68,6 +74,7 @@ TODO
   if imputs are left blank - display appropreate message
   display results with hyperlink
   display results in nicer way
-  add buffering animation
+  add buffering animation --
+  button to swap start and end?
 
 '''

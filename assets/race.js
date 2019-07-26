@@ -69,17 +69,30 @@ function closeAll() {
 function displayResults(results) {
   var time = Math.round(results.shift() * 1000) / 1000;
   var lenResults = results.length;
-  var jumpsAway = results[0].length;
+  var jumpsAway = results[0].length-1;
   var resultsDiv = document.getElementById('results');
   var info = document.getElementById('info');  
-  info.className = info.className.replace(' loading', '');
-  info.innerHTML = `Found ${lenResults} results in ${time} seconds <br>
-                    ${results[0][0]} is ${jumpsAway} away from ${results[0][jumpsAway -1]}`;
+
+  info.className = info.className.replace(/ loading/gi, '');
+  info.style.width = 'auto';
+  console.log(results);
+
+  if (jumpsAway != 0) {
+    info.innerHTML = `Found ${lenResults} results in ${time} seconds <br>
+                      ${results[0][0].replace(/_/gi, ' ')} is 
+                      ${jumpsAway} away from ${results[0][jumpsAway].replace(/_/gi, ' ')}`;
+  } else {
+    info.innerHTML = `Start and end page is the same`
+  }
 
   for (var item=0; item < lenResults; item++) {
     var resultBox = document.createElement("div"); 
     resultBox.className = "resultBox";
-    resultBox.innerHTML = String(results[item]).replace(/,/gi, ' > ');  // replace regex value to replace all occurrences
+    for (var link=0; link < jumpsAway+1; link++) {
+      resultBox.innerHTML += `<a href="https://en.wikipedia.org/wiki/${results[item][link]}" target="_blank">
+                              ${results[item][link].replace(/_/gi, ' ')}</a> > `;  // replace with regex value to replace all occurrences
+    }
+    resultBox.innerHTML = resultBox.innerHTML.slice(0, -5);  // '> ' is converted to '&gt; ', thus remove the last 5 char's
     resultsDiv.appendChild(resultBox);
   }
 }
