@@ -75,7 +75,6 @@ function displayResults(results) {
 
   info.className = info.className.replace(/ loading/gi, '');
   info.style.width = 'auto';
-  console.log(results);
 
   if (jumpsAway != 0) {
     info.innerHTML = `Found ${lenResults} results in ${time} seconds <br>
