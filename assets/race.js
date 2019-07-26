@@ -80,7 +80,7 @@ function displayResults(results) {
   if (jumpsAway != 0) {
     info.innerHTML = `Found ${lenResults} results in ${time} seconds <br>
                       ${results[0][0].replace(/_/gi, ' ')} is 
-                      ${jumpsAway} away from ${results[0][jumpsAway].replace(/_/gi, ' ')}`;
+                      ${jumpsAway} pages away from ${results[0][jumpsAway].replace(/_/gi, ' ')}`;
   } else {
     info.innerHTML = `Start and end page is the same`
   }

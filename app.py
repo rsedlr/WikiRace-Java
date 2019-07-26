@@ -57,6 +57,7 @@ def search():
     temp = []
     for pageID in route:
       temp.append(database.getPageName(pageID))  # removed [1:].replace('_', ' ') as link needs to be constructed from original name
+      print(database.getPageName(pageID))
     routes.append(temp)
   
   routes.insert(0, time.time() - initialTime)
