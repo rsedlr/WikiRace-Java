@@ -118,6 +118,7 @@ button {
 
 #info.loading {
   width: 210px;
+  text-align: left;
 }
 
 .loading:after {
