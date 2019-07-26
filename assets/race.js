@@ -77,9 +77,12 @@ function displayResults(results) {
   info.style.width = 'auto';
 
   if (jumpsAway != 0) {
-    info.innerHTML = `Found ${lenResults} paths in ${time} seconds <br>
-                      ${results[0][0].replace(/_/gi, ' ')} is 
-                      ${jumpsAway} pages away from ${results[0][jumpsAway].replace(/_/gi, ' ')}`;
+    info.innerHTML = `Found <b>${lenResults}</b> paths in <b>${time}</b> seconds <br>
+                        <a href="https://en.wikipedia.org/wiki/${results[0][0]}" 
+                        target="_blank">${results[0][0].replace(/_/gi, ' ')}</a>
+                      is <b>${jumpsAway}</b> pages away from 
+                        <a href="https://en.wikipedia.org/wiki/${results[0][jumpsAway]}" 
+                        target="_blank">${results[0][jumpsAway].replace(/_/gi, ' ')}</a>`;
   } else {
     info.innerHTML = `Start and end page is the same`
   }

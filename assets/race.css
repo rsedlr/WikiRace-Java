@@ -22,6 +22,12 @@ h1, h4, button {
   font-weight: bolder;
 }
 
+a {
+  font-weight: bold;
+  text-decoration: underline;
+  color: #0075ff;
+}
+
 input {
   border: 1px solid transparent;
   background-color: #ffffff;
