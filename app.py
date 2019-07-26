@@ -1,4 +1,4 @@
-import os, json, requests, time
+import os, json, requests, time, sys
 from bottle import route, run, template, static_file, redirect, request, response, put, post, get, error
 
 from search import searchDatabase
@@ -11,6 +11,9 @@ try:
 except:
   dev = True
   print('no database found')
+
+if '-dev' in sys.argv:
+  dev = True
 
 
 @error(404)
