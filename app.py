@@ -56,8 +56,7 @@ def search():
   for route in result:
     temp = []
     for pageID in route:
-      temp.append(database.getPageName(pageID).replace('\'', ''))  # removed [1:].replace('_', ' ') as link needs to be constructed from original name
-      print(database.getPageName(pageID).replace('\'', ''))
+      temp.append(database.getPageName(pageID).replace('\'', ''))  # replaced '[1:]' with '.replace()' as only linux has the extra inverted comma problem
     routes.append(temp)
   
   routes.insert(0, time.time() - initialTime)
