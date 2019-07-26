@@ -16,11 +16,7 @@ function autocomplete(data) {
         box.value = this.getElementsByTagName("input")[0].value;
         closeAll();
         getPageID(box.value, box.id.replace("Box", ""));
-        if (box.id == 'startBox') {
-          start[0] = this.getElementsByTagName("span")[0].innerHTML;            
-        } else if (box.id == 'endBox') {
-          end[0] = this.getElementsByTagName("span")[0].innerHTML;
-        }
+        box.style.backgroundColor = '#0ce600';
       });
       document.getElementById(box.id + '-autocomplete').appendChild(b);
     }
@@ -35,11 +31,11 @@ function getPageID(title, which) {
 }
 
 function setID(data, id) {
-  var temp = parseInt(Object.keys(data['query']['pages'])[0]);
+  var dataID = parseInt(Object.keys(data['query']['pages'])[0]);
   if (id == 'start') {
-    start[1] = temp;
+    start[1] = dataID;
   } else if (id == 'end') {
-    end[1] = temp;
+    end[1] = dataID;
   }
 }
 
@@ -55,7 +51,7 @@ function getSearchData(query) {
   if (autocompleteScript !== '') document.body.removeChild(autocompleteScript) ;
   autocompleteScript = document.createElement('script'); // the script that will hold the data we're trying to get
   autocompleteScript.src = 'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&formatversion=2&search='
-                              + query + '&namespace=&limit=10&suggest=true&callback=autocomplete'; 
+                              + query + '&namespace=0&limit=10&suggest=true&callback=autocomplete'; 
   document.body.appendChild(autocompleteScript);  // this attaches the script to the body of the page
 };
 
@@ -71,26 +67,22 @@ function displayResults(results) {
   var lenResults = results.length;
   var jumpsAway = results[0].length-1;
   var resultsDiv = document.getElementById('results');
-  var info = document.getElementById('info');  
-
-  info.className = info.className.replace(/ loading/gi, '');
-  info.style.width = 'auto';
 
   if (jumpsAway != 0) {
-    info.innerHTML = `Found <b>${lenResults}</b> paths in <b>${time}</b> seconds <br>
+    updateInfo(`Found <b>${lenResults}</b> paths in <b>${time}</b> seconds <br>
                         <a href="https://en.wikipedia.org/wiki/${results[0][0]}" 
                         target="_blank">${results[0][0].replace(/_/gi, ' ')}</a>
                       is <b>${jumpsAway}</b> pages away from 
                         <a href="https://en.wikipedia.org/wiki/${results[0][jumpsAway]}" 
-                        target="_blank">${results[0][jumpsAway].replace(/_/gi, ' ')}</a>`;
+                        target="_blank">${results[0][jumpsAway].replace(/_/gi, ' ')}</a>`);
   } else {
-    info.innerHTML = `Start and end page is the same`
+    updateInfo('Start and end page is the same', false, 'red');
   }
 
   for (var item=0; item < lenResults; item++) {
     var resultBox = document.createElement("div"); 
     resultBox.className = "resultBox";
-    if (item < 30) resultBox.style.animation = `slide-in ${((item+1)*600000000)**(1/4)}ms ease-out`;  // only animate the first 30
+    if (item < 30) resultBox.style.animation = `slide-in ${((item+1)*900000000)**(1/4)}ms ease-out`;  // only animate the first 30
     for (var link=0; link < jumpsAway+1; link++) {
       resultBox.innerHTML += `<a href="https://en.wikipedia.org/wiki/${results[item][link]}" target="_blank">
                               ${results[item][link].replace(/_/gi, ' ')}</a> > `;  // replace with regex value to replace all occurrences
@@ -100,34 +92,58 @@ function displayResults(results) {
   }
 }
 
-function search() {
+function updateInfo(message, loading=false, colour='#0ce600') {
   var info = document.getElementById('info');
-  var resultsDiv = document.getElementById('results');
-
-  info.innerHTML = 'searching';
-  info.classList += ' loading';
-  info.style.display = 'table';
-
-  while (resultsDiv.lastElementChild.id != 'info') resultsDiv.removeChild(resultsDiv.lastElementChild);
-
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() { 
-    if (this.readyState == 4 && this.status == 200) {
-      var results = JSON.parse(this.response);
-      displayResults(results);
-    }
+  info.innerHTML = message;
+  info.style.backgroundColor = colour;
+  if (loading) {
+    info.classList += ' loading';
+    info.style.width = '210px';
+  } else {
+    info.className = info.className.replace(/ loading/gi, '');
+    info.style.width = 'auto';
   }
-  xhttp.open("POST", `/wikiRace/search`, true);
-  xhttp.send(JSON.stringify({'start': start, 'end': end}));  // JSON.stringify([start[0], end[0]])
+  info.style.display = 'table';
+}
+
+function search() {
+  var resultsDiv = document.getElementById('results');
+  while (resultsDiv.lastElementChild.id != 'info') resultsDiv.removeChild(resultsDiv.lastElementChild);
+  var s = document.getElementById('startBox').style.backgroundColor;
+  var e = document.getElementById('endBox').style.backgroundColor;
+  console.log(s,e);
+
+  if (s == "rgb(255, 255, 255)" || e == "rgb(255, 255, 255)") {
+    updateInfo('Pick a start and end page from the suggestions first', false, 'red')
+  } else {
+    updateInfo('searching', true)
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() { 
+      if (this.readyState == 4 && this.status == 200) {
+        var results = JSON.parse(this.response);
+        displayResults(results);
+      }
+    }
+    xhttp.open("POST", `/wikiRace/search`, true);
+    xhttp.send(JSON.stringify({'start': start, 'end': end}));  // JSON.stringify([start[0], end[0]])
+  }
 }
 
 $(document).ready(function () {
   var startBox = document.getElementById('startBox');
-  startBox.addEventListener("keyup", () => getSearchData(startBox.value));
+  startBox.addEventListener("keyup", () => { 
+    getSearchData(startBox.value); 
+    startBox.style.backgroundColor = '#fff';
+  });
   startBox.addEventListener("focus", () => getSearchData(startBox.value));
+
   var endBox = document.getElementById('endBox');
-  endBox.addEventListener("keyup", () => getSearchData(endBox.value));
-  endBox.addEventListener("focus",  () => getSearchData(endBox.value)); // loop this
+  endBox.addEventListener("keyup", () => { 
+    getSearchData(endBox.value); 
+    endBox.style.backgroundColor = '#fff';
+  });
+  endBox.addEventListener("focus",  () => getSearchData(endBox.value));
 
   document.addEventListener("click", function (e) {
     if (!$('input').is(':focus')) closeAll();
@@ -136,7 +152,7 @@ $(document).ready(function () {
 
 
 
-
+// https://en.wikipedia.org/w/api.php?action=opensearch&format=json&formatversion=2&search=helloa&namespace=0&limit=10&suggest=true
 
 // function autoaslfk(box, arr) {
 //   var currentFocus;

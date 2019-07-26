@@ -1,3 +1,10 @@
+::selection {
+  background: #0075ff; /* highlight colour */
+}
+::-moz-selection {
+  background: #0075ff; /* highlight colour */
+}
+
 * {
   box-sizing: border-box;
 }
@@ -6,6 +13,7 @@ html, body {
   font: 16px Arial;  
   background-color: #292929;
   color: white;
+  highl
 }
 
 h1 {
@@ -57,7 +65,8 @@ button {
   z-index: 1;
   transition: 0.2s ease-in-out;
 }
-button:hover {
+button:hover,
+button:focus {
   color: #0075ff;
 }
 button:before {
@@ -71,7 +80,8 @@ button:before {
   z-index: -1;
   transition: top 0.2s ease-in-out;
 }
-button:hover:before {
+button:hover:before, 
+button:focus:before {
   top: 0;
 }
 
@@ -88,7 +98,6 @@ button:hover:before {
   border-bottom: none;
   border-top: none;
   z-index: 99;
-  /* top: 100%; */
   left: 0;
   right: 0;
   margin: 0 15px;
@@ -100,7 +109,7 @@ button:hover:before {
   padding: 10px;
   cursor: pointer;
   background-color: #fff; 
-  border-bottom: 1px solid #d4d4d4; 
+  border-top: 2px solid #0075ff; 
 }
 
 /*when hovering an item:*/
@@ -127,7 +136,7 @@ button:hover:before {
   font-size: 30px;
   font-weight: 700;
   margin-bottom: 40px;
-  transition: 0.3s ease-in-out;
+  animation: slide-in 0.2s ease-in-out;
 }
 
 #results {
@@ -164,7 +173,6 @@ button:hover:before {
 }
 
 #info.loading {
-  width: 210px;
   text-align: left;
 }
 
