@@ -31,21 +31,47 @@ input {
 
 input[type=text] {
   width: 100%;
+  border-radius: 20px;
 }
 
 button {
+  position: relative;
   background-color: #0075ff;
   color: black;
-  border: 1px solid transparent;
+  border: 3px #0075ff solid;
+  border-radius: 20px;
+  outline: 0;
   padding: 10px 15px;
   font-size: 25px;
+  text-transform: uppercase;
   margin: 10px auto; 
   display: block;
+  /* transition: 0.2s ease-in-out; */
+  overflow: hidden;
+  z-index: 1;
+  transition: 0.2s ease-in-out;
+}
+button:hover {
+  color: #0075ff;
+}
+button:before {
+  content: "";
+  position: absolute;
+  background: black;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: -1;
+  transition: top 0.2s ease-in-out;
+}
+button:hover:before {
+  top: 0;
 }
 
 .autocomplete {
   position: absolute;
-  border: 1px solid #d4d4d4;
+  /* border: 1px solid #d4d4d4; */
   color: black;
   border-bottom: none;
   border-top: none;
@@ -54,6 +80,8 @@ button {
   left: 0;
   right: 0;
   margin: 0 15px;
+  overflow: hidden;
+  border-radius: 20px;
 }
 
 .autocomplete div {
@@ -91,7 +119,8 @@ button {
   background-color: #0ce600; 
   font-size: 30px;
   font-weight: 700;
-  margin-bottom: 40px
+  margin-bottom: 40px;
+  transition: 0.3s ease-in-out;
 }
 
 #results {
@@ -102,6 +131,7 @@ button {
   margin: 20px auto;
   padding: 20px;
   background-color: #fff;
+  border-radius: 20px;
   color: black;
   display: table;
   font-size: 20px;
@@ -112,11 +142,12 @@ button {
 @keyframes slide-in {
 	0% {
 			opacity: 0;
-			transform: translateX(-200px);
+      /* transform: translateY(200px); */
+      transform: scale(0.6) translateY(20px);
 	}
 	100% {
 			opacity: 1;
-			transform: translateX(0);
+			/* transform: translateY(0); */
 	}
 }
 

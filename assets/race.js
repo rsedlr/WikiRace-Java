@@ -87,7 +87,7 @@ function displayResults(results) {
   for (var item=0; item < lenResults; item++) {
     var resultBox = document.createElement("div"); 
     resultBox.className = "resultBox";
-    resultBox.style.animation = `slide-in ${((item+1)*90000)**(1/2)}ms ease-in-out`;
+    if (item < 30) resultBox.style.animation = `slide-in ${((item+1)*600000000)**(1/4)}ms ease-out`;  // only animate the first 30
     for (var link=0; link < jumpsAway+1; link++) {
       resultBox.innerHTML += `<a href="https://en.wikipedia.org/wiki/${results[item][link]}" target="_blank">
                               ${results[item][link].replace(/_/gi, ' ')}</a> > `;  // replace with regex value to replace all occurrences
