@@ -69,10 +69,12 @@ function closeAll() {
 function displayResults(results) {
   var time = Math.round(results.shift() * 1000) / 1000;
   var lenResults = results.length;
+  var jumpsAway = results[0].length;
   var resultsDiv = document.getElementById('results');
   var info = document.getElementById('info');  
   info.className = info.className.replace(' loading', '');
-  info.innerHTML = `Found ${lenResults} results in ${time} seconds`;
+  info.innerHTML = `Found ${lenResults} results in ${time} seconds <br>
+                    ${results[0][0]} is ${jumpsAway} away from ${results[0][jumpsAway -1]}`;
 
   for (var item=0; item < lenResults; item++) {
     var resultBox = document.createElement("div"); 
