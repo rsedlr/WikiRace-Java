@@ -51,6 +51,7 @@ input[type=text] {
   width: 100%;
   border-radius: 20px;
   font-weight: bold;
+  padding-left: 20px;
 }
 
 button {
@@ -112,6 +113,7 @@ button:focus:before {
 
 .autocomplete div {
   padding: 10px;
+  padding-left: 20px;
   cursor: pointer;
   background-color: #fff; 
   border-top: 2px solid var(--main-blue); 
