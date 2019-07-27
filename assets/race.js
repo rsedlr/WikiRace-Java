@@ -98,7 +98,7 @@ function updateInfo(message, loading=false, colour='var(--green)') {
   info.style.borderColor = colour;
   if (loading) {
     info.classList += ' loading';
-    info.style.width = '215px';
+    info.style.width = '220px';
   } else {
     info.className = info.className.replace(/ loading/gi, '');
     info.style.width = 'auto';

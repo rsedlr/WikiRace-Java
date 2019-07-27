@@ -179,14 +179,13 @@ button:focus:before {
 }
 
 
-.loading {
-  font-size: 30px;
-}
-
 #info.loading {
   text-align: left;
 }
 
+.loading {
+  font-size: 30px;
+}
 .loading:after {
   overflow: hidden;
   display: inline-block;
