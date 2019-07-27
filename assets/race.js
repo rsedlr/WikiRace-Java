@@ -106,6 +106,15 @@ function updateInfo(message, loading=false, colour='var(--green)') {
   info.style.display = 'table';
 }
 
+function colourBox(box) {
+  if (box.value.length == 0) {
+    box.style.borderColor = 'var(--grey)';
+  } else {
+    box.style.borderColor = 'red';
+  }
+
+}
+
 function search() {
   var resultsDiv = document.getElementById('results');
   while (resultsDiv.lastElementChild.id != 'info') resultsDiv.removeChild(resultsDiv.lastElementChild);
@@ -131,15 +140,15 @@ function search() {
 $(document).ready(function () {
   var startBox = document.getElementById('startBox');
   startBox.addEventListener("keyup", () => { 
-    getSearchData(startBox.value); 
-    startBox.style.borderColor = 'var(--grey)';
+    getSearchData(startBox.value);
+    colourBox(startBox);
   });
   startBox.addEventListener("focus", () => getSearchData(startBox.value));
 
   var endBox = document.getElementById('endBox');
   endBox.addEventListener("keyup", () => { 
     getSearchData(endBox.value); 
-    endBox.style.borderColor = 'var(--grey)';
+    colourBox(endBox);
   });
   endBox.addEventListener("focus",  () => getSearchData(endBox.value));
 
