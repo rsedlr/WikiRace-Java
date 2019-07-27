@@ -1,8 +1,13 @@
+:root {
+  --main-blue: #0000ff; /* #0075ff */
+  --main-green: #00ff00; /* #38ff38 */
+}
+
 ::selection {
-  background: #0075ff; /* highlight colour */
+  background: var(--main-blue); /* highlight colour */
 }
 ::-moz-selection {
-  background: #0075ff; /* highlight colour */
+  background: var(--main-blue); /* highlight colour */
 }
 
 * {
@@ -13,7 +18,6 @@ html, body {
   font: 16px Arial;  
   background-color: #292929;
   color: white;
-  highl
 }
 
 h1 {
@@ -33,7 +37,7 @@ h1, h4, button {
 a {
   font-weight: bold;
   text-decoration: underline;
-  color: #0075ff;
+  color: var(--main-blue);
 }
 
 input {
@@ -46,13 +50,14 @@ input {
 input[type=text] {
   width: 100%;
   border-radius: 20px;
+  font-weight: bold;
 }
 
 button {
   position: relative;
-  background-color: #0075ff;
+  background-color: var(--main-blue);
   color: black;
-  border: 3px #0075ff solid;
+  border: 3px var(--main-blue) solid;
   border-radius: 20px;
   outline: 0;
   padding: 10px 15px;
@@ -67,7 +72,7 @@ button {
 }
 button:hover,
 button:focus {
-  color: #0075ff;
+  color: var(--main-blue);
 }
 button:before {
   content: "";
@@ -109,17 +114,17 @@ button:focus:before {
   padding: 10px;
   cursor: pointer;
   background-color: #fff; 
-  border-top: 2px solid #0075ff; 
+  border-top: 2px solid var(--main-blue); 
 }
 
 /*when hovering an item:*/
 .autocomplete div:hover {
-  background-color: #e9e9e9; 
+  background-color: #e2e2e2; 
 }
 
 /*when navigating through the items using the arrow keys:*/
 .autocomplete-active {
-  background-color: #0075ff !important; 
+  background-color: var(--main-blue) !important; 
   color: #ffffff; 
 }
 
@@ -132,7 +137,6 @@ button:focus:before {
 }
 
 #info {
-  background-color: #0ce600; 
   font-size: 30px;
   font-weight: 700;
   margin-bottom: 40px;

@@ -16,7 +16,7 @@ function autocomplete(data) {
         box.value = this.getElementsByTagName("input")[0].value;
         closeAll();
         getPageID(box.value, box.id.replace("Box", ""));
-        box.style.backgroundColor = '#0ce600';
+        box.style.backgroundColor = 'var(--main-green)';
       });
       document.getElementById(box.id + '-autocomplete').appendChild(b);
     }
@@ -92,7 +92,7 @@ function displayResults(results) {
   }
 }
 
-function updateInfo(message, loading=false, colour='#0ce600') {
+function updateInfo(message, loading=false, colour='var(--main-green)') {
   var info = document.getElementById('info');
   info.innerHTML = message;
   info.style.backgroundColor = colour;
@@ -111,11 +111,7 @@ function search() {
   while (resultsDiv.lastElementChild.id != 'info') resultsDiv.removeChild(resultsDiv.lastElementChild);
   var s = document.getElementById('startBox').style.backgroundColor;
   var e = document.getElementById('endBox').style.backgroundColor;
-  console.log(s,e);
-
-  if (s == "rgb(255, 255, 255)" || e == "rgb(255, 255, 255)") {
-    updateInfo('Pick a start and end page from the suggestions first', false, 'red')
-  } else {
+  if (s == "var(--main-green)" && e == "var(--main-green)") {
     updateInfo('searching', true)
 
     var xhttp = new XMLHttpRequest();
@@ -127,6 +123,8 @@ function search() {
     }
     xhttp.open("POST", `/wikiRace/search`, true);
     xhttp.send(JSON.stringify({'start': start, 'end': end}));  // JSON.stringify([start[0], end[0]])
+  } else {
+    updateInfo('Pick a start and end page from the suggestions first', false, 'red');
   }
 }
 

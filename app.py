@@ -46,7 +46,7 @@ def search():
     data = json.loads(request.body.read().decode("utf-8"))
   except Exception as e:
     print(e)
-    
+
   routes = []
   end = data['end']
   start = data['start']
@@ -72,6 +72,8 @@ if __name__ == '__main__':
 
 '''
 TODO
+  some inputs (such as assassins creed) dont fill box with right name and get wrong id
+
   if imputs are left blank - display appropreate message
   display results with hyperlink
   display results in nicer way
