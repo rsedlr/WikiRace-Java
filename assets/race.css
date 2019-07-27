@@ -1,13 +1,14 @@
 :root {
-  --main-blue: #0000ff; /* #0075ff */
-  --main-green: #00ff00; /* #38ff38 */
+  --blue: #0075ff; /* #0075ff */
+  --green: #00c900; /* #38ff38 */
+  --grey: rgb(48, 48, 48); /* #575757 */
 }
 
 ::selection {
-  background: var(--main-blue); /* highlight colour */
+  background: var(--blue); /* highlight colour */
 }
 ::-moz-selection {
-  background: var(--main-blue); /* highlight colour */
+  background: var(--blue); /* highlight colour */
 }
 
 * {
@@ -16,8 +17,8 @@
 
 html, body {
   font: 16px Arial;  
-  background-color: #292929;
-  color: white;
+  background-color: #8a8a8a;
+  color: black;
 }
 
 h1 {
@@ -37,28 +38,30 @@ h1, h4, button {
 a {
   font-weight: bold;
   text-decoration: underline;
-  color: var(--main-blue);
+  color: var(--blue);
 }
 
 input {
   border: 1px solid transparent;
-  background-color: #ffffff;
-  padding: 10px;
+  background-color: var(--grey);
+  padding: 8px 10px;
   font-size: 25px;
 }
 
 input[type=text] {
   width: 100%;
+  border: 4px var(--grey) solid;
   border-radius: 20px;
   font-weight: bold;
   padding-left: 20px;
+  color: white;
 }
 
 button {
   position: relative;
-  background-color: var(--main-blue);
-  color: black;
-  border: 3px var(--main-blue) solid;
+  background-color: var(--blue);
+  color: white;
+  border: 4px var(--blue) solid;
   border-radius: 20px;
   outline: 0;
   padding: 10px 15px;
@@ -71,14 +74,14 @@ button {
   z-index: 1;
   transition: 0.2s ease-in-out;
 }
-button:hover,
-button:focus {
-  color: var(--main-blue);
+/* button:focus, */
+button:hover {
+  color: var(--blue);
 }
 button:before {
   content: "";
   position: absolute;
-  background: black;
+  background: var(--grey);
   bottom: 0;
   left: 0;
   right: 0;
@@ -116,7 +119,7 @@ button:focus:before {
   padding-left: 20px;
   cursor: pointer;
   background-color: #fff; 
-  border-top: 2px solid var(--main-blue); 
+  border-top: 2px solid var(--blue); 
 }
 
 /*when hovering an item:*/
@@ -126,7 +129,7 @@ button:focus:before {
 
 /*when navigating through the items using the arrow keys:*/
 .autocomplete-active {
-  background-color: var(--main-blue) !important; 
+  background-color: var(--blue) !important; 
   color: #ffffff; 
 }
 
@@ -143,6 +146,8 @@ button:focus:before {
   font-weight: 700;
   margin-bottom: 40px;
   animation: slide-in 0.2s ease-in-out;
+  background-color: var(--grey);
+  border: 4px var(--green) solid;
 }
 
 #results {
@@ -152,9 +157,9 @@ button:focus:before {
 .resultBox {
   margin: 20px auto;
   padding: 20px;
-  background-color: #fff;
+  background-color: var(--grey);
   border-radius: 20px;
-  color: black;
+  color: white;
   display: table;
   font-size: 20px;
   font-weight: 500;

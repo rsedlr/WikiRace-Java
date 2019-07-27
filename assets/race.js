@@ -16,7 +16,7 @@ function autocomplete(data) {
         box.value = this.getElementsByTagName("input")[0].value;
         closeAll();
         getPageID(box.value, box.id.replace("Box", ""));
-        box.style.backgroundColor = 'var(--main-green)';
+        box.style.borderColor = 'var(--green)';
       });
       document.getElementById(box.id + '-autocomplete').appendChild(b);
     }
@@ -92,10 +92,10 @@ function displayResults(results) {
   }
 }
 
-function updateInfo(message, loading=false, colour='var(--main-green)') {
+function updateInfo(message, loading=false, colour='var(--green)') {
   var info = document.getElementById('info');
   info.innerHTML = message;
-  info.style.backgroundColor = colour;
+  info.style.borderColor = colour;
   if (loading) {
     info.classList += ' loading';
     info.style.width = '210px';
@@ -109,9 +109,9 @@ function updateInfo(message, loading=false, colour='var(--main-green)') {
 function search() {
   var resultsDiv = document.getElementById('results');
   while (resultsDiv.lastElementChild.id != 'info') resultsDiv.removeChild(resultsDiv.lastElementChild);
-  var s = document.getElementById('startBox').style.backgroundColor;
-  var e = document.getElementById('endBox').style.backgroundColor;
-  if (s == "var(--main-green)" && e == "var(--main-green)") {
+  var s = document.getElementById('startBox').style.borderColor;
+  var e = document.getElementById('endBox').style.borderColor;
+  if (s == "var(--green)" && e == "var(--green)") {
     updateInfo('searching', true)
 
     var xhttp = new XMLHttpRequest();
@@ -132,14 +132,14 @@ $(document).ready(function () {
   var startBox = document.getElementById('startBox');
   startBox.addEventListener("keyup", () => { 
     getSearchData(startBox.value); 
-    startBox.style.backgroundColor = '#fff';
+    startBox.style.borderColor = 'var(--grey)';
   });
   startBox.addEventListener("focus", () => getSearchData(startBox.value));
 
   var endBox = document.getElementById('endBox');
   endBox.addEventListener("keyup", () => { 
     getSearchData(endBox.value); 
-    endBox.style.backgroundColor = '#fff';
+    endBox.style.borderColor = 'var(--grey)';
   });
   endBox.addEventListener("focus",  () => getSearchData(endBox.value));
 

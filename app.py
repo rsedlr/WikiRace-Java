@@ -73,11 +73,7 @@ if __name__ == '__main__':
 '''
 TODO
   some inputs (such as assassins creed) dont fill box with right name and get wrong id
-
-  if imputs are left blank - display appropreate message
-  display results with hyperlink
-  display results in nicer way
-  add buffering animation --
+  desanetise inputs
   button to swap start and end?
 
 '''
