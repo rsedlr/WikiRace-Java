@@ -1,4 +1,3 @@
-''' ---------- TODO: REDO BREADTH FIRST SEARCH ---------- '''
 
 
 def searchDatabase(database, startID, endID):
@@ -14,7 +13,6 @@ def searchDatabase(database, startID, endID):
   forward_depth = 0
   backward_depth = 0
 
-  ''' main search loop '''
   while (len(paths) == 0) and ((len(unvisited_forward) != 0) and (len(unvisited_backward) != 0)):
     
     forward_links_count = database.getLinksCount('out', unvisited_forward.keys())
@@ -23,6 +21,7 @@ def searchDatabase(database, startID, endID):
     #-------------------- FORWARD BREADTH FIRST SEARCH --------------------#
     if forward_links_count < backward_links_count:   
       forward_depth += 1
+      print(unvisited_forward)
       outgoing_links = database.getLinks('out', unvisited_forward.keys())  # Fetch the pages which can be reached from the currently unvisited forward pages.
 
       for page_id in unvisited_forward:  # Mark all of the unvisited forward pages as visited.
@@ -58,9 +57,8 @@ def searchDatabase(database, startID, endID):
             elif source_page_id in unvisited_backward:  # If the source page is in unvisited backward, add the target page as another one of its parents.
               unvisited_backward[source_page_id].append(target_page_id)
 
-
     #--------------------  CHECK FOR PATH COMPLETION  --------------------#
-    for page_id in unvisited_forward:  # The search is complete if any of the pages are in both unvisited backward and unvisited, so find the resulting paths.
+    for page_id in unvisited_forward:  # The search is complete if any of the pages are in both unvisited backward and unvisited backward, so find the resulting paths.
       if page_id in unvisited_backward:
         paths_from_source = get_paths(unvisited_forward[page_id], visited_forward)
         paths_from_target = get_paths(unvisited_backward[page_id], visited_backward)
@@ -78,15 +76,10 @@ def searchDatabase(database, startID, endID):
 
 def get_paths(page_ids, visited_dict):
   paths = []
-
   for page_id in page_ids:
     if page_id is None:
-      # If the current page ID is None, it is either the source or target page, so return an empty
-      # path.
-      return [[]]
-    else:
-      # Otherwise, recursively get the paths for the current page's children and append them to
-      # paths.
+      return [[]] 
+    else:  # recursively get the paths for the current page's children and append them to paths.
       current_paths = get_paths(visited_dict[page_id], visited_dict)
       for current_path in current_paths:
         new_path = list(current_path)
