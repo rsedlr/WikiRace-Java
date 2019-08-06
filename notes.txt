@@ -1,5 +1,6 @@
 To run:
   gradle bootRun
+  spring run app.groovy     // (maybe)
 
 To build:
   gradle clean build
