@@ -1,4 +1,4 @@
-var start = ['', 0], end = ['', 0],   // query title followed by pageID of title
+var start = 0, end = 0,   // query title followed by pageID of title
     autocompleteScript = '', idScript = '';
 
 function autocomplete(data) {
@@ -33,9 +33,9 @@ function getPageID(title, which) {
 function setID(data, id) {
   var dataID = parseInt(Object.keys(data['query']['pages'])[0]);
   if (id == 'start') {
-    start[1] = dataID;
+    start = dataID;
   } else if (id == 'end') {
-    end[1] = dataID;
+    end = dataID;
   }
 }
 
@@ -126,7 +126,9 @@ function search() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() { 
       if (this.readyState == 4 && this.status == 200) {
+        console.log(this.response);  // ----------------------------
         var results = JSON.parse(this.response);
+        console.log(results);  // ----------------------------
         displayResults(results);
       }
     }

@@ -1,9 +1,8 @@
 plugins {
-	id 'org.springframework.boot' version '2.1.7.RELEASE'
-	id 'java'
+    id 'org.springframework.boot' version '2.1.7.RELEASE'
+    id 'java'
 }
 
-apply plugin: 'io.spring.dependency-management'
 
 group = 'com.rsedlr'
 version = '0.0.1-SNAPSHOT'
@@ -14,6 +13,7 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'io.spring.dependency-management'
 
 
 repositories {
@@ -21,15 +21,19 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-web-services'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-web-services'
 
-	compile group: 'org.thymeleaf', name: 'thymeleaf', version: '3.0.11.RELEASE'
-	compile group: 'org.thymeleaf', name: 'thymeleaf-spring4', version: '3.0.11.RELEASE'
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.1.7.RELEASE'
+    compile group: 'org.thymeleaf', name: 'thymeleaf', version: '3.0.11.RELEASE'
+    compile group: 'org.thymeleaf', name: 'thymeleaf-spring4', version: '3.0.11.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.1.7.RELEASE'
+
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'  // maybe wrong
 
 
 }
