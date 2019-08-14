@@ -1,3 +1,4 @@
+package com.rsedlr.WikiRace;
 import java.sql.*;  
 
 public class Database {
@@ -5,6 +6,7 @@ public class Database {
   Connection conn = null;  
 
   public static void main(String[] args) {  // would be connect() function
+    Connection conn = null;  
     try {  
       String url = "jdbc:sqlite:C:/sqlite/JTP.db";  
       conn = DriverManager.getConnection(url);  
@@ -24,7 +26,7 @@ public class Database {
 
     if (linkDirection != "incoming" && linkDirection != "outgoing") {
       System.out.println("ERROR: incorrect link direction for getLinksCount()");
-      return null
+      return -1;
     }
 
     String query = String.format("SELECT SUM(%s_links_count) FROM links WHERE id IN %s'", sumType, pageIDs);
@@ -42,7 +44,7 @@ public class Database {
     for (int i = 1; i <= columnCount ; i++) {
       result.add( rs.getString(i) );
     }
-    return result
+    return result;
   } 
 
 
@@ -50,7 +52,7 @@ public class Database {
     
     if (linkDirection != "incoming" && linkDirection != "outgoing") {
       System.out.println("ERROR: incorrect link direction for getLinks()");
-      return null
+      return new int[] {-1};
     }
 
     String query = String.format("SELECT id, %s_links FROM links WHERE id IN %s;", sumType, pageIDs);
@@ -68,7 +70,7 @@ public class Database {
     for (int i = 1; i <= columnCount ; i++) {
       result.add( rs.getString(i) );
     }
-    return result
+    return result;
   }
 
 
@@ -79,11 +81,13 @@ public class Database {
     try {  
       Statement stmt = conn.createStatement();  
       ResultSet rs = stmt.executeQuery(query);  
+      String returned = rs.getString();
+      return returned;
     } catch (SQLException e) {  
       System.out.println(e.getMessage());  
     }  
-
-    return rs.getString()
+    
+    return "";
   }
 } 
 

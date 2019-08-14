@@ -15,17 +15,6 @@ import org.springframework.stereotype.Controller;
 import java.io.IOException;
 
 
-// @RestController
-// public class SearchController {
-
-//     @RequestMapping(value = "/wikiRace/search", method = RequestMethod.POST)
-//     public String index() {
-//         return "Greetings from Spring Boot!";
-//     }
-
-// }
-
-
 @RestController
 public class SearchController {
 
@@ -34,7 +23,8 @@ public class SearchController {
         System.out.println("");
         System.out.println(request);
         System.out.println("");
-        String[] test = {"yes","no"};
+        // String[] test = {"yes","no"};
+        String test[] = new String[] {"yes","no"};
         return test;
     }
 
