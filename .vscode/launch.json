@@ -1,0 +1,11 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - Connect",
+      "request": "launch",
+      "mainClass": "com.rsedlr.WikiRace.Connect",
+      "projectName": "WikiRace"
+    }
+  ]
+}

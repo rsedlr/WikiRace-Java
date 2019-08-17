@@ -35,5 +35,7 @@ dependencies {
 
     compile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'  // maybe wrong
 
+    compile group: 'org.clojure', name: 'java.jdbc', version: '0.7.9'
+
 
 }

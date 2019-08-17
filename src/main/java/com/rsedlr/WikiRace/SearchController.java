@@ -22,7 +22,7 @@ public class SearchController {
     public String[] recieveSearch(@RequestBody String request) throws IOException {
         System.out.println("");
         System.out.println(request);
-        System.out.println("");
+        public Connect conne = new Connect();
         // String[] test = {"yes","no"};
         String test[] = new String[] {"yes","no"};
         return test;

@@ -1,95 +1,97 @@
-package com.rsedlr.WikiRace;
-import java.sql.*;  
+// package com.rsedlr.WikiRace;
+// import java.sql.*;  
 
-public class Database {
+// public class Database {
 
-  Connection conn = null;  
+//   Connection conn = null;  
 
-  public static void main(String[] args) {  // would be connect() function
-    Connection conn = null;  
-    try {  
-      String url = "jdbc:sqlite:C:/sqlite/JTP.db";  
-      conn = DriverManager.getConnection(url);  
-      System.out.println("Connection to SQLite has been established.");  
-    } catch (SQLException e) {  
-        System.out.println(e.getMessage());  
-    }  
-  }  
-
-
-  public static void closeConn(String[] args) {
-    conn.close();  
-  }
+//   public static void main(String[] args) {  // would be connect() function
+//     // Connection conn = null;  
+//     try {  
+//       String url = "jdbc:sqlite:/home/rsedlr/Documents/GitHub/WikiRace/src/main/resources/static/SQLite";
+//       conn = DriverManager.getConnection(url);  
+//       System.out.println("Connection to SQLite has been established.");  
+//     } catch (SQLException e) {  
+//         System.out.println(e.getMessage());  
+//     }  
+//   }  
 
 
-  public static int getLinksCount(String linkDirection, int[] pageIDs) {  // direction should be incoming or outgoing
+//   public static void closeConn(String[] args) {
+//     conn.close();  
+//   }
 
-    if (linkDirection != "incoming" && linkDirection != "outgoing") {
-      System.out.println("ERROR: incorrect link direction for getLinksCount()");
-      return -1;
-    }
 
-    String query = String.format("SELECT SUM(%s_links_count) FROM links WHERE id IN %s'", sumType, pageIDs);
+//   public static int getLinksCount(String linkDirection, int[] pageIDs) {  // direction should be incoming or outgoing
+
+//     if (linkDirection != "incoming" && linkDirection != "outgoing") {
+//       System.out.println("ERROR: incorrect link direction for getLinksCount()");
+//       return -1;
+//     }
+
+//     String query = String.format("SELECT SUM(%s_links_count) FROM links "
+//                                  + "WHERE id IN %s'", sumType, pageIDs);
     
-    try {  
-      Statement stmt = conn.createStatement();  
-      ResultSet rs = stmt.executeQuery(query);  
-    } catch (SQLException e) {  
-      System.out.println(e.getMessage());  
-    }  
+//     try {  
+//       Statement stmt = conn.createStatement();  
+//       ResultSet rs = stmt.executeQuery(query);  
+//     } catch (SQLException e) {  
+//       System.out.println(e.getMessage());  
+//     }  
 
-    ArrayList <int> result = new ArrayList<String>();
-    int columnCount = rs.getMetaData().getColumnCount();
-    rs.next();
-    for (int i = 1; i <= columnCount ; i++) {
-      result.add( rs.getString(i) );
-    }
-    return result;
-  } 
+//     ArrayList <int> result = new ArrayList<String>();
+//     int columnCount = rs.getMetaData().getColumnCount();
+//     rs.next();
+//     for (int i = 1; i <= columnCount ; i++) {
+//       result.add( rs.getString(i) );
+//     }
+//     return result;
+//   } 
 
 
-  public static int[] getLinks(String linkDirection, int[] pageIDs) {  // direction should be incoming or outgoing
+//   public static int[] getLinks(String linkDirection, int[] pageIDs) {  // direction should be incoming or outgoing
     
-    if (linkDirection != "incoming" && linkDirection != "outgoing") {
-      System.out.println("ERROR: incorrect link direction for getLinks()");
-      return new int[] {-1};
-    }
+//     if (linkDirection != "incoming" && linkDirection != "outgoing") {
+//       System.out.println("ERROR: incorrect link direction for getLinks()");
+//       return new int[] {-1};
+//     }
 
-    String query = String.format("SELECT id, %s_links FROM links WHERE id IN %s;", sumType, pageIDs);
+//     String query = String.format("SELECT id, %s_links FROM links "
+//                                  + " WHERE id IN %s;", sumType, pageIDs);
 
-    try {  
-      Statement stmt = conn.createStatement();  
-      ResultSet rs = stmt.executeQuery(query);  
-    } catch (SQLException e) {  
-      System.out.println(e.getMessage());  
-    }  
+//     try {  
+//       Statement stmt = conn.createStatement();  
+//       ResultSet rs = stmt.executeQuery(query);  
+//     } catch (SQLException e) {  
+//       System.out.println(e.getMessage());  
+//     }  
 
-    ArrayList <String> result = new ArrayList<String>();
-    int columnCount = rs.getMetaData().getColumnCount();
-    rs.next();
-    for (int i = 1; i <= columnCount ; i++) {
-      result.add( rs.getString(i) );
-    }
-    return result;
-  }
+//     ArrayList <String> result = new ArrayList<String>();
+//     int columnCount = rs.getMetaData().getColumnCount();
+//     rs.next();
+//     for (int i = 1; i <= columnCount ; i++) {
+//       result.add( rs.getString(i) );
+//     }
+//     return result;
+//   }
 
 
-  public static String getPageName(int pageID) {
+//   public static String getPageName(int pageID) {
 
-    String query = String.format("SELECT title FROM pages WHERE id = %s;", pageID);
+//     String query = String.format("SELECT title FROM pages WHERE id = %s;", pageID);
 
-    try {  
-      Statement stmt = conn.createStatement();  
-      ResultSet rs = stmt.executeQuery(query);  
-      String returned = rs.getString();
-      return returned;
-    } catch (SQLException e) {  
-      System.out.println(e.getMessage());  
-    }  
+//     try {  
+//       Statement stmt = conn.createStatement();  
+//       ResultSet rs = stmt.executeQuery(query);  
+//       String returned = rs.getString();
+//       return returned;
+//     } catch (SQLException e) {  
+//       System.out.println(e.getMessage());  
+//     }  
     
-    return "";
-  }
-} 
+//     return "";
+//   }
+// } 
 
 
 

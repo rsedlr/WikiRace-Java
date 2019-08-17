@@ -2,5 +2,6 @@
   "python.pythonPath": "C:\\Users\\reiss\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe",
   "workbench.colorCustomizations": {
     "titleBar.activeBackground": "#007e00" // change this color!
-  }
+  },
+  "java.configuration.updateBuildConfiguration": "interactive"
 }

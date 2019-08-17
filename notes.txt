@@ -2,6 +2,8 @@ To run:
   gradle bootRun
   spring run app.groovy     // (maybe)
 
+  it will then run on http://127.0.0.1:8080
+
 To build:
   gradle clean build
 
